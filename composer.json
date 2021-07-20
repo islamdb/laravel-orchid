@@ -1,6 +1,6 @@
 {
     "name": "islamdb/laravel-orchid",
-    "type": "template",
+    "type": "project",
     "description": "The Laravel Framework with Orchid Platform.",
     "keywords": ["framework", "laravel", "orchid", "livewire"],
     "license": "MIT",
