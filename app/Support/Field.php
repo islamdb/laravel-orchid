@@ -7,6 +7,7 @@ namespace App\Support;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Orchid\Screen\Fields\Cropper;
+use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Picture;
 use Orchid\Screen\Fields\RadioButtons;
 use Orchid\Screen\Fields\Range;
@@ -20,6 +21,22 @@ use SplFileInfo;
 
 class Field
 {
+    // Input types
+    const INPUT_EMAIL = 'email';
+    const INPUT_FILE = 'file';
+    const INPUT_HIDDEN = 'hidden';
+    const INPUT_MONTH = 'month';
+    const INPUT_NUMBER = 'number';
+    const INPUT_PASSWORD = 'password';
+    const INPUT_RADIO = 'radio';
+    const INPUT_RANGE = 'range';
+    const INPUT_SEARCH = 'search';
+    const INPUT_TEL = 'tel';
+    const INPUT_TEXT = 'text';
+    const INPUT_TIME = 'time';
+    const INPUT_URL = 'url';
+    const INPUT_WEEK = 'week';
+
     /**
      * Required methods
      */
@@ -43,6 +60,28 @@ class Field
         Picture::class,
         Cropper::class
     ];
+
+    /**
+     * Add meta fields
+     *
+     * @param array $fields
+     * @return array|\Orchid\Screen\Field[]|Input|Select[]|TextArea
+     */
+    public static function withMeta(array $fields)
+    {
+        return array_merge($fields, [
+            Input::make('meta_title')
+                ->type(Field::INPUT_TEXT)
+                ->title(__('Meta Title')),
+            Select::make('meta_keywords')
+                ->title(__('Meta Keywords'))
+                ->multiple()
+                ->taggable(),
+            TextArea::make('meta_description')
+                ->title(__('Meta Description'))
+                ->rows(4)
+        ]);
+    }
 
     /**
      * Check wether type is file field or not
