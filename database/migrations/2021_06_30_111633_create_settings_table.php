@@ -22,7 +22,8 @@ class CreateSettingsTable extends Migration
                 ->default('input-text');
             $table->string('group')
                 ->default('System');
-            $table->bigInteger('order')
+            $table->bigInteger('position')
+                ->unsigned()
                 ->default(1);
             $table->string('name');
             $table->text('description')

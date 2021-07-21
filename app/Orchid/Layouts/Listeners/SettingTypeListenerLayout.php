@@ -3,6 +3,7 @@
 namespace App\Orchid\Layouts\Listeners;
 
 use App\Models\Setting;
+use App\Support\Field;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Code;
 use Orchid\Screen\Fields\Input;
@@ -28,7 +29,8 @@ class SettingTypeListenerLayout extends Listener
         'group',
         'name',
         'type',
-        'description'
+        'description',
+        'old_key'
     ];
 
     /**
@@ -47,22 +49,44 @@ class SettingTypeListenerLayout extends Listener
      */
     protected function layouts(): array
     {
+        $setting = Setting::query()->find(request()->setting);
+        $key = $setting->key ?? null;
+        $name = $setting->name ?? null;
+        $group = $setting->group ?? null;
+        $type = $setting->type ?? null;
+        $description = $setting->description ?? null;
+        $options = $setting->options ?? null;
+        $options = is_null($options)
+            ? []
+            : json_decode($options, true);
+        $oldKey = null;
+        if (!empty($setting)) {
+            $oldKey = $setting->key;
+        } else if (request()->has('old_key')) {
+            $oldKey = request()->old_key;
+        }
+
         return [
             Layout::columns([
                 Layout::rows([
                     Input::make('key')
                         ->title('Key')
+                        ->value($key)
+                        ->readonly(!empty($oldKey))
                         ->required(),
                     Input::make('name')
                         ->title('Name')
+                        ->value($name)
                         ->required()
                 ]),
                 Layout::rows([
                     Input::make('group')
                         ->title('Group')
+                        ->value($group)
                         ->required(),
                     Select::make('type')
                         ->title('Type')
+                        ->value($type)
                         ->options(Setting::options())
                         ->empty()
                         ->required()
@@ -70,9 +94,11 @@ class SettingTypeListenerLayout extends Listener
             ]),
             Layout::rows([
                 TextArea::make('description')
+                    ->value($description)
                     ->title('Description'),
                 Matrix::make('options')
                     ->title('Options')
+                    ->value($options)
                     ->columns([
                         __('Active') => 'active',
                         __('Name') => 'name',
@@ -85,17 +111,18 @@ class SettingTypeListenerLayout extends Listener
                             ->sendTrueOrFalse(),
                         'name' => Input::make(),
                         'param' => TextArea::make()->style('font-family: "Courier New", monospace;'),
-                        'full' => Label::make()
-                    ])
-                    ->canSee(!empty($this->query->get('type')))
+                        'full' => Input::make()->style('font-family: "Courier New", monospace;')
+                    ]),
+                Input::make('old_key')
+                    ->type('hidden')
+                    ->value($oldKey)
             ])
         ];
     }
 
-    public static function process($key = null, $group = null, $name = null, $type = null, $description = null)
+    public static function process($key = null, $group = null, $name = null, $type = null, $description = null, $exists = null)
     {
-        $options = Setting::types((new ReflectionClass(Setting::valueField($type)))->getName())
-            ->first()
+        $options = Field::find($type)
             ->methods
             ->map(function ($param) {
                 return [
@@ -112,7 +139,8 @@ class SettingTypeListenerLayout extends Listener
             'name' => $name,
             'type' => $type,
             'description' => $description,
-            'options' => $options
+            'options' => $options,
+            'exists' => $exists
         ];
     }
 }

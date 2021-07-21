@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Dictionary;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -8,8 +7,6 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
-use Soundasleep\Html2Text;
-use Stichoza\GoogleTranslate\GoogleTranslate;
 
 if (!function_exists('route_name')) {
     /**
@@ -375,15 +372,24 @@ if (!function_exists('tajweed')) {
 if (!function_exists('setting')) {
     function setting($key, $default = null)
     {
-        $value = DB::table('settings')
-            ->select('value')
-            ->where('key', $key)
-            ->first();
+        $setting = App\Models\Setting::query()
+            ->find($key);
 
-        if (empty($value))
+        if (empty($setting)) {
             return $default;
+        }
 
-        return $value->value;
+        if (App\Support\Field::isFileField($setting->type)) {
+            return $setting->attachment()->get();
+        } elseif ($setting->is_array_value) {
+            return rescue(function () use ($setting) {
+                return json_decode($setting->value, true);
+            }, function () use ($setting) {
+                return $setting->value;
+            });
+        }
+
+        return $setting->value;
     }
 }
 

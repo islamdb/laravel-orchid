@@ -21,11 +21,13 @@ class SettingSeeder extends Seeder
 
         $data = [];
         Setting::types()
-            ->each(function ($type) use (&$data, &$faker, $group) {
+            ->values()
+            ->each(function ($type, $key) use (&$data, &$faker, $group) {
                 $data[] = [
-                    'key' => trim(strtolower($faker->unique()->word())),
+                    'key' => Str::snake($type->name),
                     'type' => $type->class,
                     'group' => ucwords($group[rand(0, count($group) - 1)]),
+                    'position' => $key + 1,
                     'name' => ucwords(Str::snake($type->name, ' ')),
                     'description' => $faker->sentence(rand(10, 20)),
                     'options' => $type->methods
@@ -33,7 +35,8 @@ class SettingSeeder extends Seeder
                             return [
                                 'active' => $param->active,
                                 'name' => $param->name,
-                                'param' => $param->param_str
+                                'param' => $param->param_str,
+                                'full' => $param->full
                             ];
                         })
                         ->toJson(),

@@ -4,6 +4,8 @@ namespace App\Orchid\Screens;
 
 use App\Models\Setting;
 use App\Orchid\Layouts\Listeners\SettingTypeListenerLayout;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\CheckBox;
@@ -60,8 +62,10 @@ class SettingScreen extends Screen
         return [
             ModalToggle::make('Create')
                 ->icon('plus')
+                ->modalTitle(__('Create'))
                 ->method('store')
                 ->modal('createOrEdit')
+                ->asyncParameters(['setting' => null])
         ];
     }
 
@@ -73,7 +77,6 @@ class SettingScreen extends Screen
     public function layout(): array
     {
         $settings = Setting::query()
-            ->latest()
             ->get()
             ->map(function ($setting) {
                 $setting->options = json_decode($setting->options);
@@ -82,49 +85,73 @@ class SettingScreen extends Screen
             });
 
         $layouts = [
-            Layout::modal('createOrEdit', [
-                SettingTypeListenerLayout::class
-            ])->method('storeOrUpdate')
-                ->applyButton(__('Save'))
-                ->size(Modal::SIZE_LG)
-                ->title('Create Setting'),
             Layout::tabs(
                 $settings->groupBy('group')
                     ->map(function ($group, $key) {
-                        $group = $group->values();
+                        $group = $group->sortBy('position')->values();
                         $settingCount = $group->count();
 
                         return Layout::rows(
                             $group->map(function (Setting $setting, $key) use ($settingCount) {
+                                $group = [
+                                    Button::make('Save')
+                                        ->icon('check')
+                                        ->method('save')
+                                        ->parameters([
+                                            '_clicked' => $setting->key
+                                        ])
+                                        ->type(Color::SUCCESS()),
+                                    ModalToggle::make('Properties')
+                                        ->icon('pencil')
+                                        ->type(Color::INFO())
+                                        ->modalTitle(__('Edit').' '.$setting->name)
+                                        ->method('update')
+                                        ->modal('createOrEdit')
+                                        ->asyncParameters(['setting' => $setting->key]),
+                                    Button::make('Delete')
+                                        ->icon('close')
+                                        ->type(Color::DANGER())
+                                        ->method('delete')
+                                        ->confirm(__('Delete') . ' ' . $setting->name)
+                                        ->parameters([
+                                            '_clicked' => $setting->key
+                                        ])
+                                ];
+
+                                $up = Button::make('')
+                                    ->icon('arrow-up-circle')
+                                    ->method('upDown')
+                                    ->parameters([
+                                        '_clicked' => $setting->key,
+                                        '_up_down' => '<'
+                                    ]);
+                                $down = Button::make('')
+                                    ->icon('arrow-down-circle')
+                                    ->method('upDown')
+                                    ->parameters([
+                                        '_clicked' => $setting->key,
+                                        '_up_down' => '>'
+                                    ]);
+
+                                if ($key == 0) {
+                                    $group[] = $down;
+                                } elseif ($key == $settingCount - 1) {
+                                    $group[] = $up;
+                                } else {
+                                    $group[] = $up;
+                                    $group[] = $down;
+                                }
+
                                 $fields = [
-                                    Input::make($setting->key.'.old_value')
+                                    Input::make($setting->key . '.old_value')
                                         ->type('hidden')
                                         ->value($setting->value),
                                     $setting->field(),
                                     Label::make('')
-                                        ->value('key: '.$setting->key)
+                                        ->value("setting('$setting->key')")
                                         ->style('font-family: "Courier New", monospace; font-size: smaller'),
-                                    Group::make([
-                                        Button::make('Save')
-                                            ->icon('check')
-                                            ->method('save')
-                                            ->parameters([
-                                                '_clicked' => $setting->key
-                                            ])
-                                            ->type(Color::SUCCESS()),
-                                        Button::make('Properties')
-                                            ->icon('pencil')
-                                            ->disabled()
-                                            ->type(Color::PRIMARY()),
-                                        Button::make('Delete')
-                                            ->icon('close')
-                                            ->type(Color::DANGER())
-                                            ->method('delete')
-                                            ->confirm(__('Delete').' '.$setting->name)
-                                            ->parameters([
-                                                '_clicked' => $setting->key
-                                            ])
-                                    ])->autoWidth(),
+                                    Group::make($group)
+                                        ->autoWidth(),
                                 ];
 
                                 if ($settingCount - 1 > $key) {
@@ -137,15 +164,84 @@ class SettingScreen extends Screen
                         );
                     })
                     ->toArray()
-            )
+            ),
+            Layout::modal('createOrEdit', [
+                SettingTypeListenerLayout::class
+            ])->method('update')
+                ->applyButton(__('Save'))
+                ->size(Modal::SIZE_LG)
+                ->title('Update Setting')
+                ->async('asyncGetData')
         ];
 
         return $layouts;
     }
 
-    public function asyncField($key = null, $group = null, $name = null, $type = null, $description = null)
+    public function asyncGetData($setting)
     {
-        return SettingTypeListenerLayout::process($key, $group, $name, $type, $description);
+        return [
+            'setting' => Setting::query()->find($setting)
+        ];
+    }
+
+    public function asyncField($key = null, $group = null, $name = null, $type = null, $description = null, $exists = null)
+    {
+        return SettingTypeListenerLayout::process($key, $group, $name, $type, $description, $exists);
+    }
+
+    public function upDown()
+    {
+        rescue(function () {
+            DB::beginTransaction();
+
+            $currentSetting = Setting::query()
+                ->select(['key', 'group', 'position'])
+                ->find(request()->_clicked);
+            $toSwitchSetting = Setting::query()
+                ->select(['key', 'group', 'position'])
+                ->where('group', $currentSetting->group)
+                ->where('position', request()->_up_down, $currentSetting->position)
+                ->orderBy('position', (request()->_up_down == '<' ? 'desc' : 'asc'))
+                ->first();
+
+            $_ = $currentSetting->position;
+            $currentSetting->position = $toSwitchSetting->position;
+            $toSwitchSetting->position = $_;
+            $currentSetting->save();
+            $toSwitchSetting->save();
+
+            DB::commit();
+
+            Alert::success(__('Saved'));
+        }, function ($e) {
+            Alert::error(__('Failed').'. '.$e->getMessage());
+        });
+    }
+
+    public function update()
+    {
+        $this->validate(request(), [
+            'key' => 'required',
+            'name' => 'required',
+            'group' => 'required',
+            'type' => 'required',
+            'old_key' => 'required'
+        ]);
+
+        $setting = Setting::query()
+            ->find(request()->old_key);
+
+        if (!empty($setting)) {
+            $data = request()->all();
+            $data['options'] = json_encode($data['options']);
+
+            $setting->fill($data);
+            $setting->save();
+
+            Alert::success($setting->name . ' ' . __('updated'));
+        } else {
+            Alert::warning(__('Setting was not found'));
+        }
     }
 
     public function delete()
@@ -154,7 +250,7 @@ class SettingScreen extends Screen
         if (!empty($setting)) {
             $setting->delete();
 
-            Alert::success($setting->name.' '.__('deleted'));
+            Alert::success($setting->name . ' ' . __('deleted'));
         } else {
             Alert::warning(__('Setting was not found'));
         }
@@ -187,7 +283,7 @@ class SettingScreen extends Screen
                 }
             }
 
-            Alert::success($setting->name.' '.__('saved'));
+            Alert::success($setting->name . ' ' . __('saved'));
         } else {
             Alert::warning(__('Setting was not found'));
         }
@@ -204,6 +300,7 @@ class SettingScreen extends Screen
 
         $data = request()->all();
         $data['options'] = json_encode($data['options'] ?? []);
+        $data['position'] = Setting::query()->max('position') + 1;
 
         Setting::query()
             ->create($data);
