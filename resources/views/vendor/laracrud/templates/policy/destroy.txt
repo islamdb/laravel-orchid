@@ -1,0 +1,35 @@
+    /**
+     * Determine whether the user can delete the @@modelClass@@.
+     *
+     * @param User  $user
+     * @param  @@modelClass@@  $@@modelClassVar@@
+     * @return mixed
+     */
+    public function delete(User $user, @@modelClass@@  $@@modelClassVar@@)
+    {
+        return $user->hasAccess($this->prefix.'delete');
+    }
+
+    /**
+     * Determine whether the user can force delete the @@modelClass@@.
+     *
+     * @param User  $user
+     * @param  @@modelClass@@  $@@modelClassVar@@
+     * @return mixed
+     */
+    public function forceDelete(User $user, @@modelClass@@  $@@modelClassVar@@)
+    {
+        return $user->hasAccess($this->prefix.'force-delete');
+    }
+
+    /**
+     * Determine whether the user can restore the @@modelClass@@.
+     *
+     * @param User  $user
+     * @param  @@modelClass@@  $@@modelClassVar@@
+     * @return mixed
+     */
+    public function restore(User $user, @@modelClass@@  $@@modelClassVar@@)
+    {
+        return $user->hasAccess($this->prefix.'restore');
+    }

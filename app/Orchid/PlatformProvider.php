@@ -28,6 +28,10 @@ class PlatformProvider extends OrchidServiceProvider
         $withExampleMenu = false;
 
         $menu = [
+            Menu::make('Dasbor')
+                ->icon('monitor')
+                ->route('platform.main')
+                ->title('Main'),
             Menu::make(__('Users'))
                 ->icon('user')
                 ->route('platform.systems.users')
@@ -39,10 +43,16 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.systems.roles')
                 ->permission('platform.systems.roles')
                 ->sort(5001),
+            Menu::make(__('Logs'))
+                ->icon('bug')
+                ->route('platform.log')
+                ->permission('platform.systems.log')
+                ->sort(5002),
             Menu::make(__('Settings'))
                 ->icon('settings')
                 ->route('platform.setting')
-                ->sort(5002)
+                ->permission('platform.systems.setting')
+                ->sort(5003)
         ];
 
         return $withExampleMenu

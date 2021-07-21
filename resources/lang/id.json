@@ -239,5 +239,9 @@
     "You may not delete your personal team.": "Anda tidak boleh menghapus tim pribadi Anda.",
     "You may not leave a team that you created.": "Anda tidak dapat meninggalkan tim yang Anda buat.",
     "Your email address is not verified.": "Alamat surel Anda belum terverifikasi.",
-    "Settings": "Pengaturan"
+    "Settings": "Pengaturan",
+    "Setting list of application": "Daftar pengaturan aplikasi",
+    "Setting": "Pengaturan",
+    "Logs": "Log",
+    "Log viewer": "Pembaca log"
 }

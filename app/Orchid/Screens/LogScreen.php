@@ -1,28 +1,29 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Orchid\Screens;
 
-use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 
-class PlatformScreen extends Screen
+class LogScreen extends Screen
 {
     /**
      * Display header name.
      *
      * @var string
      */
-    public $name = 'Dashboard';
+    public $name = 'Log';
 
     /**
      * Display header description.
      *
-     * @var string
+     * @var string|null
      */
-    public $description = 'Welcome to your Laravel Orchid application.';
+    public $description = 'Log viewer';
+
+    public $permission = [
+        'platform.systems.log'
+    ];
 
     /**
      * Query data.
@@ -41,20 +42,18 @@ class PlatformScreen extends Screen
      */
     public function commandBar(): array
     {
-        return [
-
-        ];
+        return [];
     }
 
     /**
      * Views.
      *
-     * @return \Orchid\Screen\Layout[]
+     * @return \Orchid\Screen\Layout[]|string[]
      */
     public function layout(): array
     {
         return [
-
+            Layout::view('log')
         ];
     }
 }

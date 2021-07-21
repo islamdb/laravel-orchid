@@ -1,0 +1,25 @@
+<?php
+
+namespace @@namespace@@;
+
+use @@modelFullClass@@;
+use @@userClass@@;
+use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Str;
+
+class @@className@@
+{
+    public $prefix = '';
+
+    public function __construct()
+    {
+        $this->prefix = str_replace('Policy', '', static::class);
+        $this->prefix = str_replace('App\Policies\\', '', $this->prefix);
+        $this->prefix = Str::snake($this->prefix, '-') . '.';
+        $this->prefix = Str::endsWith($this->prefix, '-view.')
+                    ? str_replace('-view.', '.', $this->prefix)
+                    : $this->prefix;
+    }
+
+    @@methods@@
+}

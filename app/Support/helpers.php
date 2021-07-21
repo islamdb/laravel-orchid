@@ -82,13 +82,6 @@ if (!function_exists('write_error')) {
     }
 }
 
-if (!function_exists('slugsql')) {
-    function slugsql($field)
-    {
-        return "LOWER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(TRIM($field), ':', ''), ')', ''), '(', ''), ',', ''), '\\\', ''), '\/', ''), '\\\', ''), ' ? ', ''), '\'', ''), '&', ''), '!', ''), '.', ''), ' ', '-'), '--', '-'), '--', '-'), 'ą', 'a'), 'ż', 'z'), 'ź', 'z'), 'ć', 'c'), 'ń', 'n'), 'ł', 'l'), 'ó', 'o'), 'ę', 'e'), 'ś', 's'))";
-    }
-}
-
 if (!function_exists('is_current_route')) {
     function is_current_route($routeName, $mustMatch = true)
     {
@@ -271,8 +264,8 @@ if (!function_exists('array_to_string')) {
     }
 }
 
-if (!function_exists('nuxt')) {
-    function nuxt($basePath = '', $makeRoute = true, $param = 'zx', $optionalParam = 'zz')
+if (!function_exists('livewire_routes')) {
+    function livewire_routes($basePath = '', $makeRoute = true, $param = 'zx', $optionalParam = 'zz')
     {
         $param = strtolower($param);
         $optionalParam = strtolower($optionalParam);

@@ -42,6 +42,10 @@ class SettingScreen extends Screen
      */
     public $description = 'Setting list of application';
 
+    public $permission = [
+        'platform.systems.setting'
+    ];
+
     /**
      * Query data.
      *
