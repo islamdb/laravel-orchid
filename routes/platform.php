@@ -13,7 +13,6 @@ use App\Orchid\Screens\LogScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
-use App\Orchid\Screens\SettingScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
@@ -120,12 +119,4 @@ Route::screen('/log', LogScreen::class)
         return $trail
             ->parent('platform.index')
             ->push(__('Log'));
-    });
-
-Route::screen('/setting', SettingScreen::class)
-    ->name('platform.setting')
-    ->breadcrumbs(function (Trail $trail) {
-        return $trail
-            ->parent('platform.index')
-            ->push(__('Setting'));
     });

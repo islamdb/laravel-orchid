@@ -48,11 +48,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.log')
                 ->permission('platform.systems.log')
                 ->sort(5002),
-            Menu::make(__('Settings'))
-                ->icon('settings')
-                ->route('platform.setting')
-                ->permission('platform.systems.setting')
-                ->sort(5003)
+//            Menu::make(__('Settings'))
+//                ->icon('settings')
+//                ->route('platform.setting')
+//                ->permission('platform.systems.setting')
+//                ->sort(5003)
         ];
 
         return $withExampleMenu

@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Setting;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+use IslamDB\OrchidHelper\Field;
+use IslamDB\OrchidSetting\Models\Setting;
 
 class SettingSeeder extends Seeder
 {
@@ -20,14 +21,12 @@ class SettingSeeder extends Seeder
         $group = $faker->words(rand(2, 3));
 
         $data = [];
-        Setting::types()
-            ->values()
+        Field::all()
             ->each(function ($type, $key) use (&$data, &$faker, $group) {
                 $data[] = [
-                    'key' => Str::snake($type->name),
+                    'key' => trim(strtolower($faker->unique()->word())),
                     'type' => $type->class,
                     'group' => ucwords($group[rand(0, count($group) - 1)]),
-                    'position' => $key + 1,
                     'name' => ucwords(Str::snake($type->name, ' ')),
                     'description' => $faker->sentence(rand(10, 20)),
                     'options' => $type->methods
@@ -41,7 +40,8 @@ class SettingSeeder extends Seeder
                         })
                         ->toJson(),
                     'created_at' => now(),
-                    'updated_at' => now()
+                    'updated_at' => now(),
+                    'position' => $key + 1
                 ];
             });
         Setting::query()
