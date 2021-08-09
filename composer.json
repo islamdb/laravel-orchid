@@ -21,7 +21,8 @@
         "livewire/livewire": "^2.5",
         "orchid/crud": "^3.0",
         "orchid/fortify": "^0.0.6",
-        "orchid/platform": "^10.0"
+        "orchid/platform": "^10.0",
+        "ext-json": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
