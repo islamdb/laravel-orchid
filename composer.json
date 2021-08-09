@@ -7,6 +7,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "ext-intl": "*",
+        "ext-json": "*",
         "alexsabur/orchid-livewire": "^3.0",
         "arcanedev/log-viewer": "^8.1",
         "digitaldream/laracrud": "^4.0",
@@ -21,8 +22,7 @@
         "livewire/livewire": "^2.5",
         "orchid/crud": "^3.0",
         "orchid/fortify": "^0.0.6",
-        "orchid/platform": "^10.0",
-        "ext-json": "*"
+        "orchid/platform": "^10.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

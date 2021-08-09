@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dd452c0ccc19cec1d71d218bb393ff54",
+    "content-hash": "66ed287790db2c893531a0900919e277",
     "packages": [
         {
             "name": "alexsabur/orchid-livewire",
@@ -1383,16 +1383,16 @@
         },
         {
             "name": "islamdb/orchid-setting",
-            "version": "v1.0.4",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/islamdb/orchid-setting.git",
-                "reference": "069c9a3f6835ae71b7a35483717480cfdff1a252"
+                "reference": "1f5427cf3919fa0a55ec3375336bcd49ffd62954"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/islamdb/orchid-setting/zipball/069c9a3f6835ae71b7a35483717480cfdff1a252",
-                "reference": "069c9a3f6835ae71b7a35483717480cfdff1a252",
+                "url": "https://api.github.com/repos/islamdb/orchid-setting/zipball/1f5427cf3919fa0a55ec3375336bcd49ffd62954",
+                "reference": "1f5427cf3919fa0a55ec3375336bcd49ffd62954",
                 "shasum": ""
             },
             "require": {
@@ -1430,9 +1430,9 @@
             ],
             "support": {
                 "issues": "https://github.com/islamdb/orchid-setting/issues",
-                "source": "https://github.com/islamdb/orchid-setting/tree/v1.0.4"
+                "source": "https://github.com/islamdb/orchid-setting/tree/v1.1.0"
             },
-            "time": "2021-08-08T09:00:25+00:00"
+            "time": "2021-08-09T22:22:14+00:00"
         },
         {
             "name": "laravel-lang/lang",
@@ -9807,7 +9807,8 @@
     "prefer-lowest": false,
     "platform": {
         "php": "^7.3|^8.0",
-        "ext-intl": "*"
+        "ext-intl": "*",
+        "ext-json": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.1.0"
