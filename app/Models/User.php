@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use Orchid\Attachment\Attachable;
 use Orchid\Platform\Models\User as Authenticatable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use Orchid\Screen\AsSource;
 
 class User extends Authenticatable
 {
-    use TwoFactorAuthenticatable;
-    
+    use TwoFactorAuthenticatable, Attachable, AsSource;
+
     /**
      * The attributes that are mass assignable.
      *

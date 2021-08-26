@@ -21,7 +21,7 @@ use Orchid\Fortify\TwoFactorScreenAuthenticatable;
 class UserProfileScreen extends Screen
 {
     use TwoFactorScreenAuthenticatable;
-    
+
     /**
      * Display header name.
      *
@@ -103,6 +103,20 @@ class UserProfileScreen extends Screen
                 Rule::unique(User::class, 'email')->ignore($request->user()),
             ],
         ]);
+
+        if (!empty($attachmentId = $request->attachment)) {
+            $request->user()
+                ->attachment()
+                ->get()
+                ->each
+                ->delete();
+
+            $request->user()
+                ->attachment()
+                ->sync(
+                    $attachmentId
+                );
+        }
 
         $request->user()
             ->fill($request->get('user'))
