@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dd452c0ccc19cec1d71d218bb393ff54",
+    "content-hash": "66ed287790db2c893531a0900919e277",
     "packages": [
         {
             "name": "alexsabur/orchid-livewire",
@@ -1548,6 +1548,7 @@
         },
         {
             "name": "laravel/framework",
+<<<<<<< HEAD
             "version": "v8.56.0",
             "source": {
                 "type": "git",
@@ -1558,6 +1559,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/d700f336dc672dcbfe46db05d4e5fe9347b3a5b6",
                 "reference": "d700f336dc672dcbfe46db05d4e5fe9347b3a5b6",
+=======
+            "version": "v8.53.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "5df423c2790f32b26baee90518bb659572aa404f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/5df423c2790f32b26baee90518bb659572aa404f",
+                "reference": "5df423c2790f32b26baee90518bb659572aa404f",
+>>>>>>> 5adcabcd8d050bf4f75b83e25ac57c36cf63f7f5
                 "shasum": ""
             },
             "require": {
@@ -1630,7 +1643,11 @@
                 "illuminate/view": "self.version"
             },
             "require-dev": {
+<<<<<<< HEAD
                 "aws/aws-sdk-php": "^3.189.0",
+=======
+                "aws/aws-sdk-php": "^3.186.4",
+>>>>>>> 5adcabcd8d050bf4f75b83e25ac57c36cf63f7f5
                 "doctrine/dbal": "^2.6|^3.0",
                 "filp/whoops": "^2.8",
                 "guzzlehttp/guzzle": "^6.5.5|^7.0.1",
@@ -1643,7 +1660,11 @@
                 "symfony/cache": "^5.1.4"
             },
             "suggest": {
+<<<<<<< HEAD
                 "aws/aws-sdk-php": "Required to use the SQS queue driver, DynamoDb failed job storage and SES mail driver (^3.189.0).",
+=======
+                "aws/aws-sdk-php": "Required to use the SQS queue driver, DynamoDb failed job storage and SES mail driver (^3.186.4).",
+>>>>>>> 5adcabcd8d050bf4f75b83e25ac57c36cf63f7f5
                 "brianium/paratest": "Required to run tests in parallel (^6.0).",
                 "doctrine/dbal": "Required to rename columns and drop SQLite columns (^2.6|^3.0).",
                 "ext-ftp": "Required to use the Flysystem FTP driver.",
@@ -1712,6 +1733,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
+<<<<<<< HEAD
             "time": "2021-08-24T13:46:30+00:00"
         },
         {
@@ -1726,6 +1748,22 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/scout/zipball/0c2e25a431113cc0510ddc9680cdec6ef115be4e",
                 "reference": "0c2e25a431113cc0510ddc9680cdec6ef115be4e",
+=======
+            "time": "2021-08-05T14:04:08+00:00"
+        },
+        {
+            "name": "laravel/scout",
+            "version": "v9.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/scout.git",
+                "reference": "d3703c03dd07cbb6068a002bc35a97e2ce9c3066"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/d3703c03dd07cbb6068a002bc35a97e2ce9c3066",
+                "reference": "d3703c03dd07cbb6068a002bc35a97e2ce9c3066",
+>>>>>>> 5adcabcd8d050bf4f75b83e25ac57c36cf63f7f5
                 "shasum": ""
             },
             "require": {
@@ -1784,7 +1822,11 @@
                 "issues": "https://github.com/laravel/scout/issues",
                 "source": "https://github.com/laravel/scout"
             },
+<<<<<<< HEAD
             "time": "2021-08-24T12:57:33+00:00"
+=======
+            "time": "2021-08-03T18:34:39+00:00"
+>>>>>>> 5adcabcd8d050bf4f75b83e25ac57c36cf63f7f5
         },
         {
             "name": "laravel/tinker",
@@ -3026,6 +3068,7 @@
         },
         {
             "name": "orchid/platform",
+<<<<<<< HEAD
             "version": "10.13.0",
             "source": {
                 "type": "git",
@@ -3036,6 +3079,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/902925c644bbf1516a815292cad40805e249316c",
                 "reference": "902925c644bbf1516a815292cad40805e249316c",
+=======
+            "version": "10.12.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/orchidsoftware/platform.git",
+                "reference": "4c83b46937f72b100a121db6e0be5917a9407479"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/4c83b46937f72b100a121db6e0be5917a9407479",
+                "reference": "4c83b46937f72b100a121db6e0be5917a9407479",
+>>>>>>> 5adcabcd8d050bf4f75b83e25ac57c36cf63f7f5
                 "shasum": ""
             },
             "require": {
@@ -3131,7 +3186,11 @@
                     "type": "opencollective"
                 }
             ],
+<<<<<<< HEAD
             "time": "2021-08-25T01:43:43+00:00"
+=======
+            "time": "2021-08-06T13:47:35+00:00"
+>>>>>>> 5adcabcd8d050bf4f75b83e25ac57c36cf63f7f5
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -3880,6 +3939,7 @@
         },
         {
             "name": "ramsey/uuid",
+<<<<<<< HEAD
             "version": "4.2.1",
             "source": {
                 "type": "git",
@@ -3890,6 +3950,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/ramsey/uuid/zipball/fe665a03df4f056aa65af552a96e1976df8c8dae",
                 "reference": "fe665a03df4f056aa65af552a96e1976df8c8dae",
+=======
+            "version": "4.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ramsey/uuid.git",
+                "reference": "7231612a5221f5524d3575bebdce20eeef8547a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/7231612a5221f5524d3575bebdce20eeef8547a1",
+                "reference": "7231612a5221f5524d3575bebdce20eeef8547a1",
+>>>>>>> 5adcabcd8d050bf4f75b83e25ac57c36cf63f7f5
                 "shasum": ""
             },
             "require": {
@@ -3961,7 +4033,11 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/uuid/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/ramsey/uuid/tree/4.2.1"
+=======
+                "source": "https://github.com/ramsey/uuid/tree/4.2.0"
+>>>>>>> 5adcabcd8d050bf4f75b83e25ac57c36cf63f7f5
             },
             "funding": [
                 {
@@ -3973,7 +4049,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2021-08-11T01:06:55+00:00"
+=======
+            "time": "2021-08-06T22:30:43+00:00"
+>>>>>>> 5adcabcd8d050bf4f75b83e25ac57c36cf63f7f5
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -7583,6 +7663,7 @@
         },
         {
             "name": "laravel-shift/blueprint",
+<<<<<<< HEAD
             "version": "v1.25.0",
             "source": {
                 "type": "git",
@@ -7593,6 +7674,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel-shift/blueprint/zipball/67cfc6b01c50545a5f050fa4f88633993e759f21",
                 "reference": "67cfc6b01c50545a5f050fa4f88633993e759f21",
+=======
+            "version": "v1.24.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-shift/blueprint.git",
+                "reference": "9e8bd03e86aed169c64ece1bfa6e21ccb449220c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-shift/blueprint/zipball/9e8bd03e86aed169c64ece1bfa6e21ccb449220c",
+                "reference": "9e8bd03e86aed169c64ece1bfa6e21ccb449220c",
+>>>>>>> 5adcabcd8d050bf4f75b83e25ac57c36cf63f7f5
                 "shasum": ""
             },
             "require": {
@@ -7635,9 +7728,15 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel-shift/blueprint/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/laravel-shift/blueprint/tree/v1.25.0"
             },
             "time": "2021-08-13T18:44:57+00:00"
+=======
+                "source": "https://github.com/laravel-shift/blueprint/tree/v1.24.2"
+            },
+            "time": "2021-07-27T17:02:08+00:00"
+>>>>>>> 5adcabcd8d050bf4f75b83e25ac57c36cf63f7f5
         },
         {
             "name": "laravel-shift/faker-registry",
@@ -7681,6 +7780,7 @@
         },
         {
             "name": "laravel/sail",
+<<<<<<< HEAD
             "version": "v1.10.1",
             "source": {
                 "type": "git",
@@ -7691,6 +7791,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/sail/zipball/267fafeaf0e0311952316ae0f3c765abc7516469",
                 "reference": "267fafeaf0e0311952316ae0f3c765abc7516469",
+=======
+            "version": "v1.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/sail.git",
+                "reference": "3e1aa8679b10ae9210eebfbc2ee5f3600f356702"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/3e1aa8679b10ae9210eebfbc2ee5f3600f356702",
+                "reference": "3e1aa8679b10ae9210eebfbc2ee5f3600f356702",
+>>>>>>> 5adcabcd8d050bf4f75b83e25ac57c36cf63f7f5
                 "shasum": ""
             },
             "require": {
@@ -7737,7 +7849,11 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
+<<<<<<< HEAD
             "time": "2021-08-23T13:43:27+00:00"
+=======
+            "time": "2021-08-03T18:51:44+00:00"
+>>>>>>> 5adcabcd8d050bf4f75b83e25ac57c36cf63f7f5
         },
         {
             "name": "mockery/mockery",
@@ -9811,8 +9927,9 @@
     "prefer-lowest": false,
     "platform": {
         "php": "^7.3|^8.0",
-        "ext-intl": "*"
+        "ext-intl": "*",
+        "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
