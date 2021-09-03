@@ -52,7 +52,12 @@ class UserPresenter extends Presenter implements Searchable, Personable
      */
     public function image(): ?string
     {
-        if (!empty($url = $this->entity->attachment()->orderByDesc('created_at')->first()->url)) {
+        $url = $this->entity
+                ->attachment()
+                ->orderByDesc('created_at')
+                ->first()
+                ->url ?? null;
+        if (!empty($url)) {
             return $url;
         }
 

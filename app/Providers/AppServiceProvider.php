@@ -26,16 +26,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        setlocale(LC_ALL, 'id_ID.utf8');
-        config(['app.locale' => 'id']);
-        Carbon::setLocale('id');
-        date_default_timezone_set('Asia/Jakarta');
+//        setlocale(LC_ALL, 'id_ID.utf8');
+//        config(['app.locale' => 'id']);
+//        Carbon::setLocale('id');
+//        date_default_timezone_set('Asia/Jakarta');
+//        App::setLocale('id');
 
         ini_set('max_execution_time', 1200000);
         ini_set('post_max_size', '200M');
         ini_set('upload_max_filesize', '100M');
-
-        App::setLocale('id');
 
         require_once(__DIR__ . '/../Support/helpers.php');
 
