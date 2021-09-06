@@ -15,7 +15,7 @@ This is a laravel template with :
         <li>digitaldream/laracrud (with custom policy)</li>
     </ul>
 </li>
-<li></li>
+<li>etc</li>
 </ul>
 
 # Installation
