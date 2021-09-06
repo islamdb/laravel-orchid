@@ -11,7 +11,7 @@
     <x-orchid-icon path="orchid" width="1.2em" height="1.2em"/>
 
     <p class="ms-3 my-0 d-none d-sm-block">
-        AppName
+        {{ config('app.name') }}
         <small class="align-bottom opacity">{{ date('Y') }}</small>
     </p>
 </div>

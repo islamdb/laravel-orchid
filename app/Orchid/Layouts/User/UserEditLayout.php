@@ -17,12 +17,14 @@ class UserEditLayout extends Rows
      */
     public function fields(): array
     {
+        $avatarId = $this->query->get('user')->avatar_id ?? null;
+
         return [
-            Cropper::make('attachment')
-                ->title('avatar')
+            Cropper::make('user.avatar')
+                ->title('Avatar')
                 ->width(200)
                 ->targetId()
-                ->value($this->query->get('user')->attachment()->orderByDesc('created_at')->first()->id)
+                ->value($avatarId)
                 ->height(200),
 
             Input::make('user.name')

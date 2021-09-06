@@ -68,4 +68,14 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
+
+    public function getAvatarIdAttribute()
+    {
+        return $this->attachment()->orderByDesc('created_at')->first()->id ?? null;
+    }
+
+    public function getAvatarUrlAttribute()
+    {
+        return $this->attachment()->orderByDesc('created_at')->first()->url ?? null;
+    }
 }

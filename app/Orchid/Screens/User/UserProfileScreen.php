@@ -104,9 +104,10 @@ class UserProfileScreen extends Screen
             ],
         ]);
 
-        if (!empty($attachmentId = $request->attachment)) {
+        if (!empty($attachmentId = $request->get('user')['avatar'])) {
             $request->user()
                 ->attachment()
+                ->where('attachments.id', '!=', $attachmentId)
                 ->get()
                 ->each
                 ->delete();
@@ -118,8 +119,11 @@ class UserProfileScreen extends Screen
                 );
         }
 
+        $data = $request->get('user');
+        unset($data['avatar']);
+
         $request->user()
-            ->fill($request->get('user'))
+            ->fill($data)
             ->save();
 
         Toast::info(__('Profile updated.'));
