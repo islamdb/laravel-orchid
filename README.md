@@ -23,5 +23,5 @@ This is a laravel template with :
 You can use this template using the Сomposer. Run this at the command line:
 
 ```php
-composer create-project islamdb/laravel-orchid appname
+composer create-project -s dev islamdb/laravel-orchid appname
 ```
